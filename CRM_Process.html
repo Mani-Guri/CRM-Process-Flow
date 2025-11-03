@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Process Flow - Complete Overview</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .main-content {
+            padding: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .process-description {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .process-description p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .diagram-section {
+            margin-bottom: 40px;
+        }
+        
+        .diagram-container {
+            background: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            min-height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            overflow: auto;
+        }
+        
+        .diagram-wrapper {
+            width: 100%;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        button {
+            padding: 12px 24px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+        
+        button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .team-scopes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+           list-style-type: none;
+        }
+
+        .team-scopes > ul {
+            list-style-type: none;
+        }
+
+        
+        .team-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-top: 4px solid;
+        }
+        
+        .field-agent {
+            border-top-color: #2E7D32;
+        }
+        
+        .sales-support {
+            border-top-color: #E65100;
+        }
+        
+        .support-team {
+            border-top-color: #880E4F;
+        }
+        
+        .admin {
+            border-top-color: #1565C0;
+        }
+        
+        .team-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+        }
+        
+        .team-card h3:before {
+            content: "";
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .field-agent h3:before { background: #2E7D32; }
+        .sales-support h3:before { background: #E65100; }
+        .support-team h3:before { background: #880E4F; }
+        .admin h3:before { background: #1565C0; }
+        
+        .team-card ul {
+            margin-left: 20px;
+        }
+        
+        .team-card li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .team-card li:before {
+           
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .key-process-steps {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .key-process-steps h2 {
+            margin-bottom: 20px;
+        }
+        
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .step-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-left: 4px solid #3498db;
+        }
+        
+        .step-number {
+            background: #3498db;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+        
+        .process-details {
+            margin-top: 40px;
+        }
+        
+        .process-details p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .integration-points {
+            background: #fff3e0;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border-left: 4px solid #E65100;
+        }
+        
+        .data-flow {
+            background: #e8f5e8;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border-left: 4px solid #2E7D32;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+        }
+        
+        /* Full Screen Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            width: 98%;
+            height: 98%;
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .modal-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+        }
+        
+        .modal-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .modal-btn {
+            padding: 8px 16px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .modal-btn:hover {
+            background: #2980b9;
+        }
+        
+        .close-btn {
+            background: #e74c3c;
+        }
+        
+        .close-btn:hover {
+            background: #c0392b;
+        }
+        
+        .modal-diagram-container {
+            flex: 1;
+            overflow: auto;
+            position: relative;
+            background: #f9f9f9;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        
+        .modal-diagram-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+        }
+        
+        .modal-diagram {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: 0 0;
+            transition: transform 0.3s ease;
+            padding: 40px;
+            min-width: 100%;
+            min-height: 100%;
+            cursor: grab;
+        }
+        
+        .modal-diagram:active {
+            cursor: grabbing;
+        }
+        
+        .zoom-info {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            z-index: 10;
+        }
+        
+        /* Custom scrollbar styling */
+        .modal-diagram-container::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+        
+        .modal-diagram-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 6px;
+        }
+        
+        .modal-diagram-container::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 6px;
+            border: 2px solid #f1f1f1;
+        }
+        
+        .modal-diagram-container::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        
+        .modal-diagram-container::-webkit-scrollbar-corner {
+            background: #f1f1f1;
+        }
+        
+        @media (max-width: 768px) {
+            .team-scopes {
+                grid-template-columns: 1fr;
+            }
+            
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-controls {
+                flex-direction: column;
+            }
+            
+            .modal-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .modal-controls {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CRM Process Flow</h1>
+            <p class="subtitle">Complete Overview of Field Agent, Sales Support, Support Team & Admin Workflows</p>
+        </header>
+        
+        <div class="main-content">
+            <h2 class="section-title">CRM Process Overview</h2>
+            
+            <div class="process-description">
+                <p>The Customer Relationship Management (CRM) Process is a comprehensive workflow designed to manage the complete customer lifecycle from initial contact through ongoing support. This integrated system ensures seamless coordination between field operations, sales teams, customer support, and administrative functions.</p>
+                <p>The process incorporates automated data tracking, real-time analytics, and multi-channel communication to optimize customer engagement and operational efficiency across all touchpoints.</p>
+            </div>
+            
+            <div class="team-scopes">
+                <div class="team-card field-agent">
+                    <h3>Field Agent Scope</h3>
+                    <ul>
+                        <li>Conduct field visits and product demonstrations</li>
+                        <li>Collect comprehensive customer details and requirements</li>
+                        <li>Document customer interest levels and specific needs</li>
+                        <li>Submit detailed entries to CRM system with photos and notes</li>
+                        <li>Create new leads with initial status: NEW</li>
+                        <li>Assess client readiness for immediate onboarding</li>
+                        <li>Collect retailer documentation and initial application data</li>
+                        <li>Verify preliminary KYC documents in the field</li>
+                        <li>Coordinate with sales support for follow-up activities</li>
+                    </ul>
+                </div>
+                
+                <div class="team-card sales-support">
+                    <h3>Sales Support Scope</h3>
+                    <ul>
+                        <li>Review and prioritize new leads assigned by admin team</li>
+                        <li>Initiate customer contact within 24 hours of lead creation</li>
+                        <li>Update lead status to CONTACTED with interaction notes</li>
+                        <li>Conduct detailed needs assessment and interest evaluation</li>
+                        <li>Schedule follow-up calls and meetings based on customer availability</li>
+                        <li>Coordinate additional product demos with field agents when required</li>
+                        <li>Move qualified clients to onboarding process</li>
+                        <li>Update CRM with detailed customer feedback and objections</li>
+                        <li>Manage lead pipeline and conversion metrics</li>
+                    </ul>
+                </div>
+                
+                <div class="team-card support-team">
+                    <h3>Support Team Scope</h3>
+                    <ul>
+                        <li>Handle customer contacts via multiple channels (Phone, WhatsApp, Email)</li>
+                        <li>Manage intelligent call routing and agent assignment</li>
+                        <li>Verify customer identity through multi-factor authentication</li>
+                        <li>Identify and categorize issues using predefined taxonomies</li>
+                        <li>Resolve device lock issues related to EMI payments</li>
+                        <li>Address payment-related queries and transaction issues</li>
+                        <li>Provide technical support for system functionality</li>
+                        <li>Update ticket status to RESOLVED with solution documentation</li>
+                        <li>Maintain service quality standards and response time SLAs</li>
+                    </ul>
+                </div>
+                
+                <div class="team-card admin">
+                    <h3>Admin Scope</h3>
+                    <ul>
+                        <li>Monitor real-time system activities and performance dashboards</li>
+                        <li>View comprehensive lead pipeline with conversion analytics</li>
+                        <li>Track support team performance against SLA commitments</li>
+                        <li>Manage user accounts, roles, and permission levels</li>
+                        <li>Assign leads to appropriate teams based on workload and expertise</li>
+                        <li>Access complete call recordings and chat conversation logs</li>
+                        <li>Generate automated and custom reports for stakeholders</li>
+                        <li>Monitor system-wide SLA compliance and performance metrics</li>
+                        <li>Configure system settings, workflows, and business rules</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="data-flow">
+                <h3>Data Flow & Analytics</h3>
+                <p><strong>Real-time Data Capture:</strong> All customer interactions, from initial field visits to support tickets, are captured in real-time and synchronized across the system.</p>
+                <p><strong>Automated Reporting:</strong> Daily, weekly, and monthly reports are automatically generated for performance monitoring and business intelligence.</p>
+                <p><strong>Quality Assurance:</strong> All data undergoes validation checks to ensure accuracy and compliance with business standards.</p>
+            </div>
+            
+            <div class="key-process-steps">
+                <h2 class="section-title">Complete Process Flow Steps</h2>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-title">Field Agent Initiation & Engagement</div>
+                        <p>Field agents conduct personalized product demonstrations, collect comprehensive customer information, and create detailed lead profiles in the CRM system with photos, notes, and specific requirements.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-title">Lead Qualification & Assessment</div>
+                        <p>Automated system evaluates lead quality while sales team assesses customer readiness. Immediate onboarding for qualified leads or assignment to sales support for nurturing and follow-up activities.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-title">Sales Support Engagement & Nurturing</div>
+                        <p>Dedicated follow-up, detailed needs assessment, objection handling, and coordination for additional demonstrations. Systematic lead progression through the sales pipeline with regular status updates.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <div class="step-title">Comprehensive Onboarding Process</div>
+                        <p>Complete retailer application submission, KYC document verification, account creation, and system configuration. Multi-level validation ensures data accuracy and compliance requirements.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">5</div>
+                        <div class="step-title">Multi-Channel Customer Support</div>
+                        <p>Integrated support system handling inquiries via phone, WhatsApp, and email. Intelligent routing, queue management, and comprehensive issue resolution with detailed documentation.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">6</div>
+                        <div class="step-title">Data Analytics & Performance Tracking</div>
+                        <p>Comprehensive tracking of all customer interactions, lead status changes, support tickets, and performance metrics. Real-time dashboards and automated reporting for data-driven decision making.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="integration-points">
+                <h3>System Integration Points</h3>
+                <p><strong>CRM Integration:</strong> Seamless data synchronization between field operations, sales, and support teams</p>
+                <!-- <p><strong>Payment Gateway:</strong> Integrated payment processing for EMI and transaction management</p> -->
+                <p><strong>Communication APIs:</strong> WhatsApp Business API, IVR system, and email automation</p>
+                <p><strong>Analytics Engine:</strong> Real-time data processing for performance metrics and predictive analytics</p>
+            </div>
+            
+            <div class="diagram-section">
+                <h2 class="section-title">Detailed CRM Process Flow</h2>
+                <div class="process-description">
+                    <p>The following comprehensive flow diagram illustrates the complete CRM workflow with integrated team coordination, automated handoffs, and real-time data tracking. The process demonstrates how customer interactions progress through various stages while maintaining data integrity and service quality.</p>
+                </div>
+                
+                <div class="controls">
+                    <button id="zoomView">Full Screen View</button>
+                </div>
+                
+                <div class="diagram-container">
+                    <div class="diagram-wrapper" id="diagram">
+                        <!-- Mermaid diagram will be rendered here -->
+                    </div>
+                </div>
+                
+                <div class="process-details">
+                    <h3>Process Flow Key Features</h3>
+                    <p><strong>Automated Workflow Management:</strong> The system automatically routes leads and support tickets to appropriate teams based on predefined rules and current workload distribution.</p>
+                    
+                    <p><strong>Real-time Data Synchronization:</strong> All customer interactions, status changes, and performance metrics are instantly updated across the system, ensuring all teams have access to current information.</p>
+                    
+                    <p><strong>Multi-level Validation:</strong> Each process stage includes validation checks to ensure data accuracy, compliance with business rules, and adherence to quality standards.</p>
+                    
+                    <p><strong>Intelligent Escalation:</strong> The system automatically escalates stalled processes, overdue follow-ups, and critical support issues to ensure timely resolution and customer satisfaction.</p>
+                    
+                    <p><strong>Comprehensive Analytics:</strong> Built-in analytics provide insights into conversion rates, response times, customer satisfaction, and operational efficiency across all process stages.</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>CRM Process Flow Diagram | Complete Business Process Documentation</p>
+        </footer>
+    </div>
+
+    <!-- Full Screen Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">CRM Process Flow - Full Screen View</h2>
+                <div class="modal-controls">
+                    <button class="modal-btn" id="zoomIn">Zoom In</button>
+                    <button class="modal-btn" id="zoomOut">Zoom Out</button>
+                    <button class="modal-btn" id="resetZoom">Reset Zoom</button>
+                    <button class="modal-btn close-btn" id="closeModal">Close</button>
+                </div>
+            </div>
+            <div class="modal-diagram-container">
+                <div class="modal-diagram-wrapper">
+                    <div class="modal-diagram" id="modalDiagram">
+                        <!-- Full screen diagram will be rendered here -->
+                    </div>
+                </div>
+                <div class="zoom-info" id="zoomInfo">Zoom: 100%</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+
+        // Original detailed diagram definition
+        const diagramDefinition = `graph TD
+    Start([CRM Process Start]) --> P1A
+
+    subgraph FieldAgent[Field Agent Scope]
+        P1A[Field Visit and Product Demo]
+        P1A --> P1B{Customer Response Assessment}
+        P1B -->|Interested| P1C
+        P1B -->|Not Interested| P1Z([End Process])
+        P1C[Collect Customer Details]
+        P1C --> P1D[Submit Entry to CRM]
+        P1D --> P1E[Create Lead in System]
+        P1E --> P1F[Lead Status: NEW]
+        P1F --> P1G{Customer Readiness Evaluation}
+        P1G -->|Ready for Onboarding| P1H
+        P1G -->|Not Ready| P2A
+    end
+
+    P1H[Collect Retailer Details] --> P1I[Submit Retailer Application]
+    P1I --> P1J[Verify KYC Documents]
+    P1J --> P1K[Create Retailer Account]
+    P1K --> P1L[Retailer Status: ONBOARDED]
+    P1L --> P3A
+
+    subgraph SalesSupport[Sales Support Scope]
+        P2A[Admin Reviews New Leads] --> P2B[Admin Assigns to Sales Support]
+        P2B --> P2C[Sales Support Contacts Customer]
+        P2C --> P2D[Update Status: CONTACTED]
+        P2D --> P2E{Customer Interest Assessment}
+        P2E -->|Need More Time| P2F[Schedule Follow-up Call]
+        P2E -->|Request Another Demo| P2H[Customer Requests Another Demo]
+        P2E -->|Ready to Proceed| P2J[Customer Ready to Proceed]
+        P2E -->|Not Interested| P2L[Customer Not Interested]
+        P2E -->|Invalid Contact| P2N[Invalid Contact Information]
+        P2F --> P2G[Update Status: FOLLOWING UP]
+        P2G --> P2C
+        P2H --> P2I[Update Status: RE-DEMO REQUESTED]
+        P2I --> P1A
+        P2J --> P2K[Update Status: READY FOR ONBOARDING]
+        P2K --> P1H
+        P2L --> P2M[Update Status: CLOSED]
+        P2N --> P2O[Update Status: INVALID]
+    end
+
+    subgraph SupportTeam[Support Team Scope]
+        P3A[Customer Contact Received] --> P3B{Contact Channel Selection}
+        P3B -->|Phone Call| P3C[Voice Call - IVR System]
+        P3B -->|WhatsApp| P3D[WhatsApp Business Chat]
+        P3B -->|Email| P3DA[Email Support]
+        P3C --> P3E[Check Agent Availability]
+        P3D --> P3E
+        P3DA --> P3E
+        P3E --> P3F{Agent Availability Check}
+        P3F -->|No Agents Available| P3G[Place in Queue]
+        P3F -->|Agents Available| P3I[Assign to Available Agent]
+        P3G --> P3H[Play Queue Messages]
+        P3H --> P3I
+        P3I --> P3J[Agent Greets Customer]
+        P3J --> P3M[Verify Customer Identity]
+        P3M --> P3N{Issue Type Identification}
+        P3N -->|Device Lock| P3O[Device Lock - EMI Due]
+        P3N -->|Payment Issue| P3P[Payment Related Query]
+        P3N -->|Technical Problem| P3Q[Technical Issue]
+        P3N -->|Account Query| P3QA[Account Management]
+        P3O --> P3R[Resolve Customer Issue]
+        P3P --> P3R
+        P3Q --> P3R
+        P3QA --> P3R
+        P3R --> P3S[Update Ticket Status: RESOLVED]
+        P3S --> P3T[Customer Satisfaction Survey]
+    end
+
+    P3T --> P3A
+
+    subgraph DataTracking[Data & Analytics]
+        P4A[All Calls Recorded]
+        P4B[Chat Conversations Logged]
+        P4C[Customer Interactions Tracked]
+        P4D[Lead Status Changes Logged]
+        P4E[Support Ticket History]
+        P4F[SLA Compliance Monitoring]
+        P4G[Performance Metrics]
+        P4H[Real-time Reports]
+        P4I[Customer Satisfaction Scores]
+        P4A --> P4G
+        P4B --> P4G
+        P4C --> P4G
+        P4D --> P4G
+        P4E --> P4G
+        P4F --> P4G
+        P4I --> P4G
+        P4G --> P4H
+    end
+
+    subgraph Admin[Admin Scope]
+        P5A[Monitor All Activities]
+        P5B[View Lead Pipeline]
+        P5C[Track Support Performance]
+        P5D[Manage User Accounts]
+        P5E[Assign Leads to Teams]
+        P5F[Access Call Recordings]
+        P5G[Review Chat Logs]
+        P5H[Generate Reports]
+        P5I[Monitor SLA Compliance]
+        P5J[System Configuration]
+        P5K[Performance Analytics]
+        P5A --> P5B
+        P5A --> P5C
+        P5A --> P5D
+        P5A --> P5F
+        P5A --> P5G
+        P5A --> P5H
+        P5A --> P5I
+        P5A --> P5J
+        P5A --> P5K
+        P5B --> P5E
+        P5C --> P5I
+    end
+
+    P1C --> P4C
+    P1D --> P4D
+    P2C --> P4A
+    P2C --> P4C
+    P2C --> P4D
+    P3C --> P4A
+    P3D --> P4B
+    P3DA --> P4B
+    P3J --> P4C
+    P3R --> P4E
+    P3S --> P4F
+    P3T --> P4I
+    P4H --> P5A
+    P5E --> P2B
+    P5D --> P1A
+    P5D --> P2C
+    P5D --> P3I
+
+    classDef fieldClass fill:#E8F5E8,stroke:#2E7D32,stroke-width:2px
+    classDef salesClass fill:#FFF3E0,stroke:#E65100,stroke-width:2px
+    classDef supportClass fill:#FCE4EC,stroke:#880E4F,stroke-width:2px
+    classDef adminClass fill:#E3F2FD,stroke:#1565C0,stroke-width:2px
+    classDef dataClass fill:#FFF9C4,stroke:#F57F17,stroke-width:2px
+    classDef decisionClass fill:#E1BEE7,stroke:#7B1FA2,stroke-width:2px
+    
+    class P1A,P1C,P1D,P1E,P1H,P1I,P1J,P1K fieldClass
+    class P1B,P1G decisionClass
+    class P1F,P1L dataClass
+    class P2A,P2B,P2C,P2F,P2H,P2J,P2L,P2N salesClass
+    class P2E decisionClass
+    class P2D,P2G,P2I,P2K,P2M,P2O dataClass
+    class P3A,P3C,P3D,P3DA,P3J,P3M,P3O,P3P,P3Q,P3QA,P3R supportClass
+    class P3B,P3F,P3N decisionClass
+    class P3E,P3G,P3H,P3I,P3S,P3T dataClass
+    class P4A,P4B,P4C,P4D,P4E,P4F,P4G,P4H,P4I dataClass
+    class P5A,P5B,P5C,P5D,P5E,P5F,P5G,P5H,P5I,P5J,P5K adminClass`;
+
+        // Render the main diagram
+       document.getElementById('diagram').innerHTML = '<div class="mermaid">' + (typeof diagramDefinition !== 'undefined' ? diagramDefinition : '') + '</div>';
+
+// DOM refs
+const modalOverlay = document.getElementById('modalOverlay');
+const zoomViewBtn = document.getElementById('zoomView');
+const closeModalBtn = document.getElementById('closeModal');
+const zoomInBtn = document.getElementById('zoomIn');
+const zoomOutBtn = document.getElementById('zoomOut');
+const resetZoomBtn = document.getElementById('resetZoom');
+const zoomInfo = document.getElementById('zoomInfo');
+const modalDiagram = document.getElementById('modalDiagram');
+const modalDiagramContainer = document.querySelector('.modal-diagram-container');
+
+// Transform state
+let scale = 1;
+let translateX = 0;
+let translateY = 0;
+
+// Drag state (pointer)
+let isPointerDown = false;
+let pointerStartX = 0;
+let pointerStartY = 0;
+let startTranslateX = 0;
+let startTranslateY = 0;
+
+// Config
+const MIN_SCALE = 0.5;
+const MAX_SCALE = 3;
+const SCALE_STEP = 0.1;
+
+/* Utility - apply combined transform */
+function applyTransform() {
+    // Use translate then scale so panning is visually intuitive.
+    // We set transform-origin: 0 0 in CSS so translate coordinates remain simple.
+    modalDiagram.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+    zoomInfo.textContent = `Zoom: ${Math.round(scale * 100)}%`;
+}
+
+/* Initialize / re-render modal diagram */
+function initializeModalDiagram() {
+    modalDiagram.innerHTML = '<div class="mermaid">' + (typeof diagramDefinition !== 'undefined' ? diagramDefinition : '') + '</div>';
+    // Reset transform state
+    scale = 1;
+    translateX = 0;
+    translateY = 0;
+    applyTransform();
+    // Re-render mermaid inside modal
+    setTimeout(() => {
+        mermaid.init(undefined, modalDiagram.querySelectorAll('.mermaid'));
+    }, 100);
+}
+
+/* Zoom helpers */
+function zoomBy(delta) {
+    const newScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, +(scale + delta).toFixed(3)));
+    scale = newScale;
+    applyTransform();
+}
+
+zoomInBtn.addEventListener('click', () => zoomBy(SCALE_STEP));
+zoomOutBtn.addEventListener('click', () => zoomBy(-SCALE_STEP));
+resetZoomBtn.addEventListener('click', () => {
+    scale = 1;
+    translateX = 0;
+    translateY = 0;
+    applyTransform();
+});
+
+/* Wheel zooming (when pointer is over the diagram) */
+modalDiagram.addEventListener('wheel', (e) => {
+    // Only zoom if Ctrl is pressed? currently we always zoom on wheel to match your earlier behavior
+    e.preventDefault();
+    if (e.deltaY < 0) {
+        zoomBy(SCALE_STEP);
+    } else {
+        zoomBy(-SCALE_STEP);
+    }
+}, { passive: false });
+
+/* POINTER (mouse & touch) drag/pan handlers mounted on modalDiagramContainer
+   We update translateX/translateY directly and call applyTransform().
+   Using pointer events gives built-in multi-device support. */
+modalDiagramContainer.style.touchAction = 'none'; // prevent browser touch scrolling interfering
+
+modalDiagramContainer.addEventListener('pointerdown', (e) => {
+    // Only start dragging for left button (mouse) or for touch
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    isPointerDown = true;
+    modalDiagramContainer.setPointerCapture(e.pointerId);
+    modalDiagramContainer.classList.add('dragging');
+
+    pointerStartX = e.clientX;
+    pointerStartY = e.clientY;
+    startTranslateX = translateX;
+    startTranslateY = translateY;
+
+    // prevent text selection
+    document.body.style.userSelect = 'none';
+});
+
+modalDiagramContainer.addEventListener('pointermove', (e) => {
+    if (!isPointerDown) return;
+    e.preventDefault();
+    const dx = e.clientX - pointerStartX;
+    const dy = e.clientY - pointerStartY;
+
+    // basic sensitivity: pan should not be scaled by `scale` (keeps 1:1 dragging)
+    translateX = startTranslateX + dx;
+    translateY = startTranslateY + dy;
+
+    applyTransform();
+});
+
+modalDiagramContainer.addEventListener('pointerup', (e) => {
+    if (!isPointerDown) return;
+    isPointerDown = false;
+    try { modalDiagramContainer.releasePointerCapture(e.pointerId); } catch (err) {}
+    modalDiagramContainer.classList.remove('dragging');
+    document.body.style.userSelect = '';
+});
+
+modalDiagramContainer.addEventListener('pointercancel', () => {
+    isPointerDown = false;
+    modalDiagramContainer.classList.remove('dragging');
+    document.body.style.userSelect = '';
+});
+
+/* Optional: double-click to reset pan (or you can change to dblclick for zoom) */
+modalDiagramContainer.addEventListener('dblclick', (e) => {
+    // reset pan but keep current zoom
+    translateX = 0;
+    translateY = 0;
+    applyTransform();
+});
+
+/* Cursor feedback via CSS injection */
+const style = document.createElement('style');
+style.textContent = `
+.modal-diagram { cursor: grab; }
+.modal-diagram.dragging, .modal-diagram-container.dragging { cursor: grabbing !important; user-select: none; }
+`;
+document.head.appendChild(style);
+
+/* Full screen view and modal control */
+zoomViewBtn.addEventListener('click', function() {
+    initializeModalDiagram();
+    modalOverlay.style.display = 'flex';
+    // allow a small delay so mermaid can render before showing transforms
+    setTimeout(() => applyTransform(), 150);
+});
+
+closeModalBtn.addEventListener('click', function() {
+    modalOverlay.style.display = 'none';
+});
+
+// Close modal when clicking outside the content
+modalOverlay.addEventListener('click', function(e) {
+    if (e.target === modalOverlay) {
+        modalOverlay.style.display = 'none';
+    }
+});
+
+/* Initialize Mermaid on load for the normal page view (not modal) */
+window.addEventListener('load', function() {
+    // Initialize mermaid inside main diagram container (page view)
+    mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+    // Ensure modal transform initial state is applied
+    applyTransform();
+});
+    </script>
+</body>
+</html>
